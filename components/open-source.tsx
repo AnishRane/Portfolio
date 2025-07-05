@@ -155,9 +155,8 @@ export function OpenSource() {
 
                   <Button
                     asChild
-                    variant="outline"
                     size="sm"
-                    className="w-full glass-card-subtle hover:glass-card mt-auto"
+                    className="w-full bg-[#9EECFF] text-black hover:bg-[#28a745] transition-colors duration-200 mt-auto"
                   >
                     <Link href={project.url} target="_blank" rel="noopener noreferrer">
                       <Github className="h-4 w-4 mr-2" />
@@ -184,10 +183,10 @@ export function OpenSource() {
                 I'm always excited to collaborate on innovative open source projects. 
                 Whether it's AI, blockchain, or developer tooling, let's create something amazing together.
               </p>
-              <div className="flex-responsive gap-3 sm:gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
                 <Button
                   asChild
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground"
+                  className="bg-gradient-to-r from-[#28a745] to-[#238636] hover:from-[#238636] hover:to-[#1e7e34] text-white transition-all duration-200"
                 >
                   <Link href="https://github.com/AnishRane" target="_blank" rel="noopener noreferrer">
                     <Github className="h-4 w-4 mr-2" />
