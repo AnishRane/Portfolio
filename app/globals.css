@@ -4,48 +4,49 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 262 83% 58%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222.2 84% 4.9%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96%;
-    --accent-foreground: 222.2 84% 4.9%;
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 0 0% 20%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 8%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 262 83% 58%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 20%;
+    --input: 0 0% 15%;
+    --ring: 0 0% 40%;
     --radius: 0.5rem;
+    --header-height: 100px;
   }
 
   .dark {
-    --background: 240 10% 3.9%;
+    --background: 0 0% 3%;
     --foreground: 0 0% 98%;
-    --card: 240 10% 7%;
+    --card: 0 0% 7%;
     --card-foreground: 0 0% 98%;
-    --popover: 240 10% 7%;
+    --popover: 0 0% 7%;
     --popover-foreground: 0 0% 98%;
-    --primary: 262 83% 58%;
-    --primary-foreground: 0 0% 0%;
-    --secondary: 240 4% 16%;
+    --primary: 0 0% 25%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 16%;
     --secondary-foreground: 0 0% 98%;
-    --muted: 240 4% 16%;
-    --muted-foreground: 240 5% 65%;
-    --accent: 240 4% 16%;
+    --muted: 0 0% 16%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 0 0% 16%;
     --accent-foreground: 0 0% 98%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 4% 16%;
-    --input: 240 4% 16%;
-    --ring: 262 83% 58%;
+    --border: 0 0% 16%;
+    --input: 0 0% 16%;
+    --ring: 0 0% 40%;
   }
 }
 
@@ -59,16 +60,32 @@
 }
 
 @layer utilities {
+  .scroll-mt-header {
+    scroll-margin-top: var(--header-height);
+  }
+
+  .section-padding {
+    @apply pt-16 pb-16 sm:pt-20 sm:pb-20 lg:pt-24 lg:pb-24;
+  }
+
+  .section-padding-large {
+    @apply pt-20 pb-20 sm:pt-24 sm:pb-24 lg:pt-28 lg:pb-32;
+  }
+
   .border-gradient {
-    @apply border border-transparent bg-gradient-to-r from-primary/20 via-purple-500/20 to-pink-500/20 bg-clip-border;
+    @apply border border-transparent bg-gradient-to-r from-gray-400/20 via-gray-500/20 to-gray-600/20 bg-clip-border;
   }
 
   .glow-effect {
-    @apply shadow-lg shadow-primary/25;
+    @apply shadow-lg shadow-gray-400/25;
   }
 
   .text-gradient {
-    @apply bg-gradient-to-r from-primary via-purple-400 to-pink-400 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 bg-clip-text text-transparent;
+  }
+
+  .count-up-text {
+    @apply bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 bg-clip-text text-transparent;
   }
 
   .bg-gradient-dark {
@@ -90,11 +107,11 @@
   }
 
   .glass-card-hover {
-    @apply glass-card transition-all duration-300 hover:bg-primary/10 hover:shadow-lg hover:shadow-primary/10;
+    @apply glass-card transition-all duration-300 hover:bg-primary/10 hover:shadow-lg hover:shadow-gray-400/10;
   }
 
   .dark .glass-card-hover {
-    @apply transition-all duration-300 hover:shadow-lg hover:shadow-primary/10;
+    @apply transition-all duration-300 hover:shadow-lg hover:shadow-gray-400/10;
   }
 
   .dark .glass-card-hover:hover {
@@ -131,18 +148,66 @@
   }
 
   .glass-glow {
-    box-shadow: 0 8px 32px rgba(168, 85, 247, 0.15),
+    box-shadow: 0 8px 32px rgba(156, 163, 175, 0.15),
       inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
 
   .dark .glass-glow {
-    box-shadow: 0 8px 32px rgba(168, 85, 247, 0.2),
+    box-shadow: 0 8px 32px rgba(156, 163, 175, 0.2),
       inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  /* Responsive Container */
+  .container {
+    @apply w-full mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Responsive text sizing */
+  .text-responsive-sm {
+    @apply text-sm sm:text-base;
+  }
+
+  .text-responsive-base {
+    @apply text-base sm:text-lg;
+  }
+
+  .text-responsive-lg {
+    @apply text-lg sm:text-xl lg:text-2xl;
+  }
+
+  .text-responsive-xl {
+    @apply text-xl sm:text-2xl lg:text-3xl;
+  }
+
+  .text-responsive-2xl {
+    @apply text-2xl sm:text-3xl lg:text-4xl;
+  }
+
+  .text-responsive-3xl {
+    @apply text-3xl sm:text-4xl lg:text-5xl;
+  }
+
+  /* Responsive spacing */
+  .space-y-responsive {
+    @apply space-y-4 sm:space-y-6 lg:space-y-8;
+  }
+
+  .gap-responsive {
+    @apply gap-4 sm:gap-6 lg:gap-8;
+  }
+
+  .mb-responsive {
+    @apply mb-8 sm:mb-12 lg:mb-16;
+  }
+
+  .mt-responsive {
+    @apply mt-8 sm:mt-12 lg:mt-16;
   }
 }
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--header-height);
 }
 
 /* Custom scrollbar */
@@ -155,11 +220,11 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gradient-to-b from-primary/60 to-purple-500/60 rounded-full;
+  @apply bg-gradient-to-b from-gray-400/60 to-gray-600/60 rounded-full;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply from-primary/80 to-purple-500/80;
+  @apply from-gray-400/80 to-gray-600/80;
 }
 
 /* Enhanced dark theme styling */
@@ -167,13 +232,72 @@ html {
   color-scheme: dark;
 }
 
-.dark body {
-  background: linear-gradient(
-    135deg,
-    hsl(240, 10%, 3.9%) 0%,
-    hsl(240, 8%, 4.5%) 25%,
-    hsl(240, 10%, 3.9%) 50%,
-    hsl(240, 8%, 5%) 75%,
-    hsl(240, 10%, 3.9%) 100%
-  );
+/* Media Queries for responsive design */
+@media (max-width: 640px) {
+  .container {
+    @apply px-4;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .container {
+    @apply px-6;
+  }
+}
+
+@media (min-width: 1025px) {
+  .container {
+    @apply px-8;
+  }
+}
+
+/* Ensure proper section alignment */
+section {
+  @apply scroll-mt-header;
+  scroll-margin-top: 100px;
+  position: relative;
+}
+
+/* Add space between sections */
+section:not(#home) {
+  border-top: 1px solid transparent;
+  margin-top: 2rem;
+}
+
+/* Ensure sections have minimum spacing */
+section:not(#home):before {
+  content: '';
+  display: block;
+  height: 1rem;
+  width: 100%;
+  position: absolute;
+  top: -1rem;
+  left: 0;
+  pointer-events: none;
+}
+
+/* Responsive grid improvements */
+.grid-responsive-2 {
+  @apply grid-cols-1 sm:grid-cols-2;
+}
+
+.grid-responsive-3 {
+  @apply grid-cols-1 sm:grid-cols-2 lg:grid-cols-3;
+}
+
+.grid-responsive-4 {
+  @apply grid-cols-1 sm:grid-cols-2 lg:grid-cols-4;
+}
+
+/* Flex responsive improvements */
+.flex-responsive {
+  @apply flex-col sm:flex-row;
+}
+
+.items-responsive {
+  @apply items-center sm:items-start;
+}
+
+.justify-responsive {
+  @apply justify-center sm:justify-start;
 }

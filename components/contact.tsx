@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Mail, Github, Twitter } from "lucide-react"
 import Link from "next/link"
 import { useCopyEmail } from "@/hooks/use-copy-email"
+import ShinyText from './ShinyText'
 
 export function Contact() {
   const { copyEmail, email } = useCopyEmail()
@@ -26,18 +27,23 @@ export function Contact() {
   ]
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-br from-background via-muted/20 to-primary/5">
-      <div className="container mx-auto px-4">
+    <section id="contact" className="section-padding bg-gradient-to-br from-background via-muted/20 to-primary/5">
+      <div className="container">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-gradient">
-            Get In Touch
+          <h2 className="text-responsive-2xl font-bold text-center mb-4">
+            <ShinyText 
+              text="Get In Touch" 
+              disabled={false} 
+              speed={3} 
+              className="bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 bg-clip-text text-transparent drop-shadow-sm" 
+            />
           </h2>
-          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+          <p className="text-center text-muted-foreground mb-responsive max-w-2xl mx-auto text-responsive-base">
             I'm always interested in discussing new opportunities, innovative projects, and collaborations in backend
             development and Web3 technologies.
           </p>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid grid-responsive-2 gap-responsive">
             <Card className="glass-card-hover glass-glow">
               <CardHeader>
                 <CardTitle className="text-gradient">

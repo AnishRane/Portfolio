@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Github, Star, GitFork, Users } from "lucide-react"
 import Link from "next/link"
+import ShinyText from './ShinyText'
 
 export function OpenSource() {
   const contributions = [
@@ -60,81 +61,93 @@ export function OpenSource() {
   ]
 
   return (
-    <section id="open-source" className="py-20">
-      <div className="container mx-auto px-4">
+    <section id="open-source" className="section-padding">
+      <div className="container">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-gradient">
-            Open Source Contributions
+          <h2 className="text-responsive-2xl font-bold text-center mb-4">
+            <ShinyText 
+              text="Open Source Contributions" 
+              disabled={false} 
+              speed={3} 
+              className="bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 bg-clip-text text-transparent drop-shadow-sm" 
+            />
           </h2>
-          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+          <p className="text-center text-muted-foreground mb-responsive max-w-2xl mx-auto text-responsive-base">
             Contributing to the developer community through meaningful open source projects. 
             Building tools and SDKs that empower other developers in AI, blockchain, and Web3 technologies.
           </p>
 
-          <div className="grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 mb-8">
+          <div className="grid grid-responsive-3 gap-responsive mb-8">
             {contributions.map((project, index) => (
               <Card
                 key={index}
                 className="h-full flex flex-col glass-card-hover glass-glow"
               >
-                <CardHeader>
-                  <div className="flex items-start justify-between mb-2">
-                    <CardTitle className="text-xl text-gradient flex-1">
+                <CardHeader className="pb-4">
+                  <div className="flex items-start justify-between mb-3">
+                    <CardTitle className="text-xl text-gradient flex-1 leading-tight">
                       {project.name}
                     </CardTitle>
                     <Link
                       href={project.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-primary transition-colors"
+                      className="text-muted-foreground hover:text-[#28a745] transition-colors duration-200 ml-3 flex-shrink-0"
                     >
                       <Github className="h-5 w-5" />
                     </Link>
                   </div>
-                  <p className="text-sm text-muted-foreground">{project.repository}</p>
-                </CardHeader>
-                <CardContent className="flex-1 flex flex-col">
-                  <p className="text-muted-foreground mb-4 flex-1">
-                    {project.description}
+                  <p className="text-sm text-muted-foreground font-mono">
+                    {project.repository}
                   </p>
+                </CardHeader>
+                <CardContent className="flex-1 flex flex-col pt-0">
+                  {/* Description with fixed height */}
+                  <div className="mb-6">
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {project.description}
+                    </p>
+                  </div>
 
                   {/* Repository Stats */}
-                  <div className="flex items-center gap-4 mb-4 text-sm text-muted-foreground">
+                  <div className="flex items-center justify-between mb-6 text-sm text-muted-foreground">
                     <div className="flex items-center gap-1">
                       <Star className="h-4 w-4" />
-                      <span>{project.stats.stars}</span>
+                      <span className="font-medium">{project.stats.stars}</span>
                     </div>
                     <div className="flex items-center gap-1">
                       <GitFork className="h-4 w-4" />
-                      <span>{project.stats.forks}</span>
+                      <span className="font-medium">{project.stats.forks}</span>
                     </div>
                     <div className="flex items-center gap-1">
                       <Users className="h-4 w-4" />
-                      <span>{project.stats.contributors}</span>
+                      <span className="font-medium">{project.stats.contributors}</span>
                     </div>
                   </div>
 
                   {/* Technologies */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.technologies.map((tech) => (
-                      <Badge
-                        key={tech}
-                        variant="outline"
-                        className="text-xs glass-card-subtle"
-                      >
-                        {tech}
-                      </Badge>
-                    ))}
+                  <div className="mb-6">
+                    <div className="flex flex-wrap gap-2">
+                      {project.technologies.map((tech) => (
+                        <Badge
+                          key={tech}
+                          variant="outline"
+                          className="text-xs glass-card-subtle"
+                        >
+                          {tech}
+                        </Badge>
+                      ))}
+                    </div>
                   </div>
 
                   {/* Contribution Highlights */}
-                  <div className="mb-4">
-                    <h4 className="text-sm font-semibold mb-2">Key Contributions:</h4>
-                    <ul className="space-y-1">
+                  <div className="mb-6 flex-1">
+                    <h4 className="text-sm font-semibold mb-3 text-foreground">Key Contributions:</h4>
+                    <ul className="space-y-2">
                       {project.highlights.map((highlight, idx) => (
                         <li key={idx} className="text-xs text-muted-foreground flex items-start gap-2">
-                          <span className="text-primary mt-1">•</span>
-                          <span>{highlight}</span>
+                          <span className="text-primary mt-0.5 flex-shrink-0">•</span>
+                          <span className="leading-relaxed">{highlight}</span>
                         </li>
                       ))}
                     </ul>
@@ -159,14 +172,19 @@ export function OpenSource() {
           {/* Call to Action */}
           <div className="text-center">
             <div className="glass-card glass-glow p-8 rounded-xl max-w-3xl mx-auto">
-              <h3 className="text-xl font-semibold mb-4 text-gradient">
-                Let's Build Together
+              <h3 className="text-responsive-lg font-semibold mb-4">
+                <ShinyText 
+                  text="Let's Build Together" 
+                  disabled={false} 
+                  speed={3} 
+                  className="bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 bg-clip-text text-transparent drop-shadow-sm" 
+                />
               </h3>
-              <p className="text-muted-foreground mb-6">
+              <p className="text-muted-foreground mb-6 text-responsive-base">
                 I'm always excited to collaborate on innovative open source projects. 
                 Whether it's AI, blockchain, or developer tooling, let's create something amazing together.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex-responsive gap-3 sm:gap-4 justify-center">
                 <Button
                   asChild
                   className="bg-primary hover:bg-primary/90 text-primary-foreground"

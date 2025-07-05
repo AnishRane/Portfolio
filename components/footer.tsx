@@ -8,15 +8,15 @@ export function Footer() {
   const { copyEmail } = useCopyEmail()
 
   return (
-    <footer className="bg-gradient-to-r from-background to-muted/20 border-t py-12">
-      <div className="container mx-auto px-4">
+    <footer className="bg-gradient-to-r from-background to-muted/20 border-t section-padding">
+      <div className="container">
         <div className="max-w-4xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="flex-responsive justify-between items-center gap-responsive">
             <div className="text-center md:text-left">
-              <h3 className="text-xl font-bold mb-2 bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
+              <h3 className="text-responsive-lg font-bold mb-2 bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 bg-clip-text text-transparent">
                 Anish Rane
               </h3>
-              <p className="text-muted-foreground">Backend Developer & Web3 Specialist</p>
+              <p className="text-muted-foreground text-responsive-sm">Backend Developer & Web3 Specialist</p>
             </div>
 
             <div className="flex space-x-6">
@@ -40,7 +40,7 @@ export function Footer() {
           </div>
 
           <div className="border-t mt-8 pt-8 text-center text-muted-foreground">
-            <p>&copy; {new Date().getFullYear()} Anish Rane. All rights reserved.</p>
+            <p className="text-responsive-sm">&copy; {new Date().getFullYear()} Anish Rane. All rights reserved.</p>
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Github, Linkedin, Twitter, Users, Star } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import ShinyText from './ShinyText'
 
 export function GithubProfile() {
   const githubData = {
@@ -34,11 +35,16 @@ export function GithubProfile() {
   };
 
   return (
-    <section id="github-profile" className="py-20">
-      <div className="container mx-auto px-4">
+    <section id="github-profile" className="section-padding">
+      <div className="container">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gradient">
-            Find Me on GitHub
+          <h2 className="text-responsive-2xl font-bold text-center mb-responsive">
+            <ShinyText 
+              text="Find Me on GitHub" 
+              disabled={false} 
+              speed={3} 
+              className="bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 bg-clip-text text-transparent drop-shadow-sm" 
+            />
           </h2>
           <div className="glass-card-hover glass-glow p-8 rounded-xl">
             <div className="flex flex-col sm:flex-row items-center gap-8">

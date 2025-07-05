@@ -8,17 +8,17 @@ import { Toaster } from "@/components/ui/toaster"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Anish Rane - Backend Developer Portfolio",
+  title: "Anish Rane - Backend Developer",
   description:
     "Highly skilled Backend Developer with 4+ years of experience in scalable systems, Web3 applications, and cloud platforms.",
   keywords: "Backend Developer, NestJS, Node.js, Web3, AWS, GCP, Azure, TypeScript, JavaScript",
   authors: [{ name: "Anish Rane" }],
   openGraph: {
-    title: "Anish Rane - Backend Developer Portfolio",
+    title: "Anish Rane - Backend Developer",
     description: "Experienced Backend Developer specializing in scalable systems and Web3 applications",
     type: "website",
   },
-    generator: 'v0.dev'
+    generator: 'AnishRane'
 }
 
 export default function RootLayout({

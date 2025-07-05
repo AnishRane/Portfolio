@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import Image from "next/image"
 import { Code, Server, Cloud, Database, Smartphone, Shield } from "lucide-react"
+import ShinyText from './ShinyText'
 
 export function Skills() {
   const skillCategories = [
@@ -68,14 +69,19 @@ export function Skills() {
   ]
 
   return (
-    <section id="skills" className="py-20 bg-gradient-to-br from-background via-muted/20 to-primary/5">
-      <div className="container mx-auto px-4">
+    <section id="skills" className="section-padding bg-gradient-to-br from-background via-muted/20 to-primary/5">
+      <div className="container">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gradient">
-            Technical Skills
+          <h2 className="text-responsive-2xl font-bold text-center mb-responsive">
+            <ShinyText 
+              text="Technical Skills" 
+              disabled={false} 
+              speed={3} 
+              className="bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 bg-clip-text text-transparent drop-shadow-sm" 
+            />
           </h2>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-responsive-3 gap-responsive">
             {skillCategories.map((category, index) => (
               <Card
                 key={index}
