@@ -1,9 +1,10 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+"use client";
+
 import { Button } from "@/components/ui/button"
-import { Github, Linkedin, Twitter, Users, Star } from "lucide-react"
+import { Github, Linkedin, Twitter } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import ShinyText from './ShinyText'
+import { GitHubStatsCards } from './github-stats-card'
 
 export function GithubProfile() {
   const githubData = {
@@ -11,9 +12,6 @@ export function GithubProfile() {
     username: "AnishRane",
     avatarUrl: "https://github.com/AnishRane.png",
     profileUrl: "https://github.com/AnishRane",
-    followers: 6,
-    following: 4,
-    stars: 10,
     socials: [
       {
         name: "LinkedIn",
@@ -28,25 +26,14 @@ export function GithubProfile() {
     ]
   };
 
-  const stats = {
-    stats: "https://github-readme-stats.vercel.app/api?username=AnishRane&theme=dark&hide_border=false&include_all_commits=true&count_private=false",
-    streak: "https://github-readme-streak-stats.herokuapp.com/?user=AnishRane&theme=dark&hide_border=false",
-    topLangs: "https://github-readme-stats.vercel.app/api/top-langs/?username=AnishRane&theme=dark&hide_border=false&include_all_commits=true&count_private=true&layout=compact"
-  };
-
   return (
     <section id="github-profile" className="section-padding">
       <div className="container">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-responsive-2xl font-bold text-center mb-responsive">
-            <ShinyText 
-              text="Find Me on GitHub" 
-              disabled={false} 
-              speed={3} 
-              className="bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 bg-clip-text text-transparent drop-shadow-sm" 
-            />
+          <h2 className="text-responsive-2xl font-bold text-center mb-responsive text-[hsl(var(--github-text))]">
+            Find Me on GitHub
           </h2>
-          <div className="glass-card-hover glass-glow p-8 rounded-xl">
+          <div className="github-card p-8 rounded-lg">
             <div className="flex flex-col sm:flex-row items-center gap-8">
               {/* Avatar */}
               <div className="flex-shrink-0">
@@ -55,67 +42,44 @@ export function GithubProfile() {
                   alt={`${githubData.name}'s GitHub Avatar`}
                   width={128}
                   height={128}
-                  className="rounded-full border-4 border-primary/50"
+                  className="rounded-full border-2 border-[hsl(var(--github-border))]"
                 />
               </div>
-              
+
               {/* Profile Info */}
               <div className="flex-1 text-center sm:text-left">
-                <h3 className="text-2xl font-bold">{githubData.name}</h3>
+                <h3 className="text-2xl font-semibold text-[hsl(var(--github-text))]">{githubData.name}</h3>
                 <Link href={githubData.profileUrl} target="_blank" rel="noopener noreferrer">
-                  <p className="text-lg text-muted-foreground hover:text-primary transition-colors">@{githubData.username}</p>
+                  <p className="text-lg text-[hsl(var(--github-text-muted))] hover:text-[hsl(var(--github-accent))] transition-colors">@{githubData.username}</p>
                 </Link>
 
-                {/* Stats */}
-                <div className="flex justify-center sm:justify-start items-center gap-4 my-4 text-muted-foreground">
-                  <div className="flex items-center gap-1">
-                    <Users className="h-4 w-4 text-primary" />
-                    <span><span className="font-bold text-foreground">{githubData.followers}</span> followers</span>
-                  </div>
-                  <span>·</span>
-                  <div className="flex items-center gap-1">
-                    <span><span className="font-bold text-foreground">{githubData.following}</span> following</span>
-                  </div>
-                  <span>·</span>
-                  <div className="flex items-center gap-1">
-                    <Star className="h-4 w-4 text-primary" />
-                    <span><span className="font-bold text-foreground">{githubData.stars}</span> stars</span>
-                  </div>
+                <div className="mt-4 flex flex-wrap justify-center sm:justify-start gap-3">
+                  <Button asChild className="bg-[hsl(var(--github-success))] hover:bg-[hsl(var(--github-success))]/90 text-white font-medium">
+                    <Link href={githubData.profileUrl} target="_blank" rel="noopener noreferrer">
+                      <Github className="h-4 w-4 mr-2" />
+                      Follow on GitHub
+                    </Link>
+                  </Button>
+                  {githubData.socials.map((social) => (
+                    <Button asChild key={social.name} variant="outline" className="github-btn-outline">
+                      <Link href={social.url} target="_blank" rel="noopener noreferrer">
+                        {social.icon}
+                        <span className="ml-2">{social.name}</span>
+                      </Link>
+                    </Button>
+                  ))}
                 </div>
-                
-                <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground">
-                  <Link href={githubData.profileUrl} target="_blank" rel="noopener noreferrer">
-                    <Github className="h-4 w-4 mr-2" />
-                    Follow on GitHub
-                  </Link>
-                </Button>
               </div>
             </div>
 
-            {/* GitHub Stats */}
-            <div className="mt-8 pt-8 border-t border-primary/20">
-              <h4 className="text-xl font-semibold mb-4 text-center text-gradient">GitHub Stats</h4>
-              <div className="flex flex-col items-center gap-4">
-                <Image src={stats.stats} alt="GitHub Stats" width={495} height={195} className="rounded-lg w-full h-auto" />
-                <Image src={stats.streak} alt="GitHub Streak" width={495} height={195} className="rounded-lg w-full h-auto" />
-                <Image src={stats.topLangs} alt="Top Languages" width={495} height={195} className="rounded-lg w-full h-auto" />
-              </div>
-            </div>
-            
-            {/* Socials */}
-            <div className="mt-8 pt-8 border-t border-primary/20 flex justify-center gap-4">
-              {githubData.socials.map((social) => (
-                 <Button asChild key={social.name} variant="outline" className="glass-card-subtle hover:glass-card">
-                   <Link href={social.url} target="_blank" rel="noopener noreferrer">
-                     {social.icon}
-                     <span className="ml-2">{social.name}</span>
-                   </Link>
-                 </Button>
-              ))}
+            {/* GitHub Stats - Native API powered */}
+            <div className="mt-8 pt-8 border-t border-[hsl(var(--github-border-muted))]">
+              <h4 className="text-lg font-semibold mb-6 text-center text-[hsl(var(--github-text))]">Contribution Stats</h4>
+              <GitHubStatsCards />
             </div>
           </div>
         </div>
       </div>
     </section>
   );
-} 
+}
