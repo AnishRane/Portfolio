@@ -1,5 +1,6 @@
 "use client"
 
+import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Github, Mail } from "lucide-react"
 import Link from "next/link"
@@ -7,6 +8,17 @@ import { useCopyEmail } from "@/hooks/use-copy-email"
 import RotatingText from './RotatingText'
 import ShinyText from './ShinyText'
 // import Beams from './Beams'
+
+const EASE = [0.22, 1, 0.36, 1] as const
+
+const heroVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: EASE, delay: i * 0.1 },
+  }),
+}
 
 export function Hero() {
   const { copyEmail } = useCopyEmail()
@@ -26,53 +38,82 @@ export function Hero() {
           rotation={-15}
         />
       </div> */}
-      
+
       {/* Content */}
       <div className="container text-center relative z-10">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-responsive-3xl font-bold mb-6">
-            <ShinyText 
-              text="Anish Rane" 
-              disabled={false} 
-              speed={3} 
-              className="bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 bg-clip-text text-transparent drop-shadow-sm" 
+          <motion.h1
+            custom={0}
+            variants={heroVariants}
+            initial="hidden"
+            animate="visible"
+            className="text-responsive-3xl font-bold mb-6"
+          >
+            <ShinyText
+              text="Anish Rane"
+              disabled={false}
+              speed={3}
+              className="bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 bg-clip-text text-transparent drop-shadow-sm"
             />
-          </h1>
-          <h2 className="text-responsive-xl font-semibold mb-6 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent flex items-center justify-center gap-2 flex-wrap">
+          </motion.h1>
+          <motion.h2
+            custom={1}
+            variants={heroVariants}
+            initial="hidden"
+            animate="visible"
+            className="text-responsive-xl font-semibold mb-6 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent flex items-center justify-center gap-2 flex-wrap"
+          >
+            <RotatingText
+              texts={['AI Ecosystem', 'Backend', 'Web3', 'DevOps']}
+              mainClassName="px-2 sm:px-2 md:px-3 bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 text-white shadow-lg overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg border border-gray-400/30"
+              staggerFrom="last"
+              initial={{ y: "100%", opacity: 0 } as any}
+              animate={{ y: 0, opacity: 1 } as any}
+              exit={{ y: "-100%", opacity: 0 } as any}
+              staggerDuration={0.012}
+              splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              rotationInterval={3000}
+            />
+          </motion.h2>
+          <motion.p
+            custom={2}
+            variants={heroVariants}
+            initial="hidden"
+            animate="visible"
+            className="text-responsive-lg text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed"
+          >
+            Backend developer & OSS contributor with 5+ years building scalable systems. Authored DPSN SDKs
+            enabling real-time decentralized data for AI agents, and contributed integrations to GAME by Virtuals
+            and GOAT SDK in the Agentic AI & DeFi ecosystem.
+          </motion.p>
 
-                          <RotatingText
-                texts={['Backend','Web3','Devops']}
-                mainClassName="px-2 sm:px-2 md:px-3 bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 text-white shadow-lg overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg border border-gray-400/30"
-                staggerFrom="last"
-                initial={{ y: "100%", opacity: 0 } as any}
-                animate={{ y: 0, opacity: 1 } as any}
-                exit={{ y: "-100%", opacity: 0 } as any}
-                staggerDuration={0.015}
-                splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
-                transition={{ type: "spring", damping: 25, stiffness: 500, mass: 0.8 }}
-                rotationInterval={3000}
-              />
-            Specialist
-          </h2>
-          <p className="text-responsive-lg text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
-            Highly skilled Backend Developer with 4+ years of experience designing, building, and deploying scalable
-            backend systems and Web3 applications using JavaScript, TypeScript, and NestJS.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-8">
+          <motion.div
+            custom={3}
+            variants={heroVariants}
+            initial="hidden"
+            animate="visible"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-8"
+          >
             <Button
               asChild
               size="lg"
               className="w-full sm:w-auto bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 text-white shadow-lg border border-gray-400/30 hover:from-gray-300 hover:via-gray-400 hover:to-gray-500"
             >
-              <Link href="#contact">Get In Touch</Link>
+              <Link href="#open-source">View OSS Work</Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="w-full sm:w-auto bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 text-white shadow-lg border border-gray-400/30 hover:from-gray-300 hover:via-gray-400 hover:to-gray-500">
-              <Link href="#projects">View Projects</Link>
+              <Link href="#contact">Get In Touch</Link>
             </Button>
-          </div>
+          </motion.div>
 
-          <div className="flex justify-center space-x-6">
+          <motion.div
+            custom={4}
+            variants={heroVariants}
+            initial="hidden"
+            animate="visible"
+            className="flex justify-center space-x-6"
+          >
             <button
               onClick={copyEmail}
               className="text-muted-foreground hover:text-primary transition-colors"
@@ -88,7 +129,7 @@ export function Hero() {
             >
               <Github className="h-5 w-5 sm:h-6 sm:w-6" />
             </Link>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

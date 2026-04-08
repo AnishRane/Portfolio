@@ -255,19 +255,27 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: var(--header-height);
+  scroll-snap-type: y proximity;
+  overscroll-behavior-y: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+body {
+  overscroll-behavior-y: none;
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 4px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-muted;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gradient-to-b from-purple-400/60 to-cyan-400/60 rounded-full;
+  @apply bg-gradient-to-b from-purple-400/50 to-cyan-400/50 rounded-full;
+  transition: opacity 0.2s;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -298,29 +306,51 @@ html {
   }
 }
 
-/* Ensure proper section alignment */
+/* Subpage scroll — each section is a full viewport page */
 section {
   @apply scroll-mt-header;
   scroll-margin-top: 100px;
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+  min-height: 100vh;
   position: relative;
 }
 
-/* Add space between sections */
-section:not(#home) {
-  border-top: 1px solid transparent;
-  margin-top: 2rem;
+/* Section number label */
+.section-label {
+  font-size: 0.7rem;
+  font-family: monospace;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.35;
+  color: hsl(var(--muted-foreground));
+  user-select: none;
 }
 
-/* Ensure sections have minimum spacing */
-section:not(#home):before {
-  content: '';
-  display: block;
-  height: 1rem;
-  width: 100%;
-  position: absolute;
-  top: -1rem;
-  left: 0;
-  pointer-events: none;
+/* Section indicator dot styles */
+.section-dot-active {
+  box-shadow: 0 0 10px rgba(167, 139, 250, 0.9), 0 0 20px rgba(167, 139, 250, 0.4);
+}
+
+/* Badge for authored vs contributed */
+.badge-authored {
+  background: linear-gradient(135deg, rgba(167, 139, 250, 0.25), rgba(34, 211, 238, 0.15));
+  border: 1px solid rgba(167, 139, 250, 0.4);
+  color: hsl(var(--primary));
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  font-family: monospace;
+  text-transform: uppercase;
+}
+
+.badge-contributed {
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.15), rgba(74, 222, 128, 0.1));
+  border: 1px solid rgba(34, 211, 238, 0.35);
+  color: hsl(var(--accent));
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  font-family: monospace;
+  text-transform: uppercase;
 }
 
 /* Responsive grid improvements */

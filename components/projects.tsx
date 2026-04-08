@@ -67,12 +67,12 @@ export function Projects() {
                 className="h-full flex flex-col glass-card-hover glass-glow"
               >
                 <CardHeader>
-                  <CardTitle className="text-xl mb-2 text-gradient">
+                  <CardTitle className="text-lg mb-2 text-gradient">
                     {project.title}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="flex-1 flex flex-col">
-                  <p className="text-muted-foreground mb-4 flex-1">{project.description}</p>
+                  <p className="text-sm text-muted-foreground mb-4 flex-1">{project.description}</p>
 
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.technologies.map((tech) => (

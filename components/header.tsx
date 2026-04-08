@@ -5,7 +5,11 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 
-export function Header() {
+interface HeaderProps {
+  activeSection?: string
+}
+
+export function Header({ activeSection = "home" }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
@@ -41,14 +45,14 @@ export function Header() {
   }, [isMenuOpen])
 
   const navItems = [
-    { href: "#home", label: "Home" },
-    { href: "#about", label: "About" },
-    { href: "#experience", label: "Experience" },
-    { href: "#skills", label: "Skills" },
-    { href: "#projects", label: "Projects" },
-    { href: "#open-source", label: "Open Source" },
-    { href: "#github-profile", label: "GitHub" },
-    { href: "#contact", label: "Contact" },
+    { href: "#home", label: "Home", id: "home" },
+    { href: "#open-source", label: "Open Source", id: "open-source" },
+    { href: "#about", label: "About", id: "about" },
+    { href: "#experience", label: "Experience", id: "experience" },
+    { href: "#projects", label: "Projects", id: "projects" },
+    { href: "#skills", label: "Skills", id: "skills" },
+    { href: "#github-profile", label: "GitHub", id: "github-profile" },
+    { href: "#contact", label: "Contact", id: "contact" },
   ]
 
   return (
@@ -62,16 +66,26 @@ export function Header() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-8">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="text-foreground/80 hover:text-primary transition-colors"
-                >
-                  {item.label}
-                </Link>
-              ))}
+            <nav className="hidden md:flex items-center space-x-6">
+              {navItems.map((item) => {
+                const isActive = activeSection === item.id
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`relative text-sm font-medium transition-colors duration-200 pb-0.5 ${
+                      isActive
+                        ? "text-primary"
+                        : "text-foreground/70 hover:text-primary"
+                    }`}
+                  >
+                    {item.label}
+                    {isActive && (
+                      <span className="absolute -bottom-0.5 left-0 right-0 h-px bg-primary rounded-full" />
+                    )}
+                  </Link>
+                )
+              })}
             </nav>
 
             {/* Mobile Navigation Button */}
@@ -107,21 +121,29 @@ export function Header() {
           {/* Menu Items */}
           <div className="flex-1 overflow-y-auto py-6">
             <div className="flex flex-col space-y-2 px-6">
-              {navItems.map((item, index) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="text-foreground/80 hover:text-primary transition-all duration-200 py-3 px-4 rounded-lg hover:bg-muted/50 group"
-                  onClick={() => setIsMenuOpen(false)}
-                  style={{
-                    animationDelay: `${index * 50}ms`
-                  }}
-                >
-                  <span className="block text-base font-medium group-hover:translate-x-1 transition-transform duration-200">
-                    {item.label}
-                  </span>
-                </Link>
-              ))}
+              {navItems.map((item, index) => {
+                const isActive = activeSection === item.id
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`transition-all duration-200 py-3 px-4 rounded-lg group flex items-center gap-2 ${
+                      isActive
+                        ? "bg-primary/10 text-primary"
+                        : "text-foreground/80 hover:text-primary hover:bg-muted/50"
+                    }`}
+                    onClick={() => setIsMenuOpen(false)}
+                    style={{ animationDelay: `${index * 50}ms` }}
+                  >
+                    {isActive && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                    )}
+                    <span className="block text-base font-medium group-hover:translate-x-1 transition-transform duration-200">
+                      {item.label}
+                    </span>
+                  </Link>
+                )
+              })}
             </div>
           </div>
 

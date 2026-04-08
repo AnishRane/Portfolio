@@ -46,13 +46,13 @@ export function Contact() {
           <div className="grid grid-responsive-2 gap-responsive">
             <Card className="glass-card-hover glass-glow">
               <CardHeader>
-                <CardTitle className="text-gradient">
+                <CardTitle className="text-lg text-gradient">
                   Let's Connect
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground mb-6">
-                  Whether you're looking for a backend developer, want to discuss a Web3 project, or just want to
+                <p className="text-sm text-muted-foreground mb-6">
+                  Whether you're looking for a backend developer, want to discuss a Ai project, or just want to
                   connect, I'd love to hear from you.
                 </p>
 
@@ -92,7 +92,7 @@ export function Contact() {
 
             <Card className="glass-card-hover glass-glow">
               <CardHeader>
-                <CardTitle className="text-gradient">
+                <CardTitle className="text-lg text-gradient">
                   Quick Actions
                 </CardTitle>
               </CardHeader>

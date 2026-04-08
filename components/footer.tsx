@@ -16,7 +16,7 @@ export function Footer() {
               <h3 className="text-responsive-lg font-bold mb-2 bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 bg-clip-text text-transparent">
                 Anish Rane
               </h3>
-              <p className="text-muted-foreground text-responsive-sm">Backend Developer & Web3 Specialist</p>
+              <p className="text-muted-foreground text-responsive-sm">Backend | Ai | Devops</p>
             </div>
 
             <div className="flex space-x-6">

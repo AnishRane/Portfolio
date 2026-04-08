@@ -8,17 +8,17 @@ import { Toaster } from "@/components/ui/toaster"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Anish Rane - Backend Developer",
+  title: "Anish Rane - Backend Developer & AI OSS Contributor",
   description:
-    "Highly skilled Backend Developer with 4+ years of experience in scalable systems, Web3 applications, and cloud platforms.",
-  keywords: "Backend Developer, NestJS, Node.js, Web3, AWS, GCP, Azure, TypeScript, JavaScript",
+    "Backend developer & OSS contributor with 5+ years of experience. Authored DPSN SDKs for AI agents, contributed to GAME by Virtuals and GOAT SDK. Specializes in NestJS, Node.js, Web3, and cloud platforms.",
+  keywords: "Backend Developer, AI Ecosystem, Open Source, DPSN, NestJS, Node.js, Web3, AWS, GCP, TypeScript, AI Agents",
   authors: [{ name: "Anish Rane" }],
   openGraph: {
-    title: "Anish Rane - Backend Developer",
-    description: "Experienced Backend Developer specializing in scalable systems and Web3 applications",
+    title: "Anish Rane - Backend Developer & AI OSS Contributor",
+    description: "OSS contributor in the AI agent ecosystem. Authored DPSN SDKs and integrated with GAME by Virtuals & GOAT SDK.",
     type: "website",
   },
-    generator: 'AnishRane'
+  generator: "AnishRane"
 }
 
 export default function RootLayout({
