@@ -1,48 +1,45 @@
-"use client"
-
-import Link from "next/link"
-import { Github, Mail } from "lucide-react"
-import { useCopyEmail } from "@/hooks/use-copy-email"
+import { GithubIcon, LinkedinIcon, XIcon, MailIcon } from "@/components/ta-icons"
 
 export function Footer() {
-  const { copyEmail } = useCopyEmail()
+  const year = new Date().getFullYear()
 
   return (
-    <footer className="bg-gradient-to-r from-background to-muted/20 border-t section-padding">
-      <div className="container">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex-responsive justify-between items-center gap-responsive">
-            <div className="text-center md:text-left">
-              <h3 className="text-responsive-lg font-bold mb-2 bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 bg-clip-text text-transparent">
-                Anish Rane
-              </h3>
-              <p className="text-muted-foreground text-responsive-sm">Backend | Ai | Devops</p>
-            </div>
-
-            <div className="flex space-x-6">
-              <button
-                onClick={copyEmail}
-                className="text-muted-foreground hover:text-primary transition-colors"
-                aria-label="Copy email"
-              >
-                <Mail className="h-5 w-5" />
-              </button>
-              <Link
-                href="https://github.com/AnishRane"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-                aria-label="GitHub"
-              >
-                <Github className="h-5 w-5" />
-              </Link>
-            </div>
-          </div>
-
-          <div className="border-t mt-8 pt-8 text-center text-muted-foreground">
-            <p className="text-responsive-sm">&copy; {new Date().getFullYear()} Anish Rane. All rights reserved.</p>
+    <footer style={{ borderTop: "1px solid rgba(255,255,255,0.08)", padding: "40px 0" }}>
+      <div
+        style={{
+          maxWidth: 1152,
+          margin: "0 auto",
+          padding: "0 24px",
+          display: "flex",
+          flexWrap: "wrap",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 20,
+        }}
+      >
+        <div>
+          <div style={{ fontFamily: "var(--f-head)", fontWeight: 600, fontSize: "1.1rem", color: "#F4F4F6" }}>Anish Rane</div>
+          <div style={{ fontFamily: "var(--f-mono)", fontSize: "0.78rem", color: "#6B6B76", marginTop: 4, letterSpacing: "0.06em" }}>
+            Backend &amp; AI Engineer
           </div>
         </div>
+        <div style={{ display: "flex", gap: 12 }}>
+          <a href="https://github.com/AnishRane" target="_blank" rel="noopener" aria-label="GitHub" className="ta-fsocial">
+            <GithubIcon size={18} />
+          </a>
+          <a href="mailto:anishrane.dev@gmail.com" aria-label="Email" className="ta-fsocial">
+            <MailIcon size={18} />
+          </a>
+          <a href="https://x.com/AnishRane" target="_blank" rel="noopener" aria-label="X" className="ta-fsocial">
+            <XIcon size={15} />
+          </a>
+          <a href="https://www.linkedin.com/in/anishrane" target="_blank" rel="noopener" aria-label="LinkedIn" className="ta-fsocial">
+            <LinkedinIcon size={17} />
+          </a>
+        </div>
+      </div>
+      <div style={{ maxWidth: 1152, margin: "24px auto 0", padding: "0 24px", fontFamily: "var(--f-mono)", fontSize: "0.74rem", color: "#6B6B76" }}>
+        © {year} Anish Rane. All rights reserved.
       </div>
     </footer>
   )

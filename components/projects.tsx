@@ -1,122 +1,86 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Github } from "lucide-react"
-import Link from "next/link"
-import ShinyText from './ShinyText'
+import { GithubIcon, CodeIcon } from "@/components/ta-icons"
+
+const PROJECTS = [
+  {
+    title: "Solana Token Launch System",
+    desc: "Decentralized token launch platform with secure distribution smart contracts.",
+    tags: ["Solana", "Rust", "Web3", "Smart Contracts"],
+    url: "https://github.com/osnHQ/SOL-meme-stack",
+  },
+  {
+    title: "Market Maker Bot (Solana)",
+    desc: "Automated AMM for DEX liquidity with custom trading algorithms.",
+    tags: ["Solana", "TypeScript", "DeFi", "Trading"],
+    url: "https://github.com/AnishRane/SolMarketMaker",
+  },
+  {
+    title: "TON Blockchain Airdrop System",
+    desc: "Secure token distribution with advanced airdrop mechanisms.",
+    tags: ["TON", "Blockchain", "Smart Contracts"],
+    url: "https://github.com/AnishRane/JettonAirdrop",
+  },
+  {
+    title: "Ethereum Crowdfunding Platform",
+    desc: "Smart-contract crowdfunding for transparent, trustless fundraising.",
+    tags: ["Ethereum", "Solidity", "Web3"],
+    url: "https://github.com/AnishRane/CrowdFunding",
+  },
+  {
+    title: "E-Sign Application",
+    desc: "Secure digital document signing with auth and document management.",
+    tags: ["NestJS", "TypeScript", "Auth"],
+    url: "https://github.com/AnishRane/E-Sign-Document",
+  },
+]
 
 export function Projects() {
-  const projects = [
-    {
-      title: "Solana Token Launch System",
-      description:
-        "Decentralized token launch platform on Solana with smart contracts for secure token distribution and launch mechanisms.",
-      technologies: ["Solana", "Rust", "Web3", "Smart Contracts"],
-      githubUrl: "https://github.com/osnHQ/SOL-meme-stack",
-    },
-    {
-      title: "Market Maker Bot (Solana)",
-      description:
-        "Automated market maker bot for liquidity provision on Solana DEXs, implementing sophisticated trading algorithms.",
-      technologies: ["Solana", "TypeScript", "DeFi", "Trading Algorithms"],
-      githubUrl: "https://github.com/AnishRane/SolMarketMaker",
-    },
-    {
-      title: "TON Blockchain Airdrop System",
-      description:
-        "Secure and efficient token distribution system built on the TON blockchain with advanced airdrop mechanisms.",
-      technologies: ["TON", "Blockchain", "Smart Contracts", "Token Distribution"],
-      githubUrl: "https://github.com/AnishRane/JettonAirdrop",
-    },
-    {
-      title: "Ethereum Crowdfunding Platform",
-      description:
-        "Smart contract-based crowdfunding platform on Ethereum enabling secure and transparent fundraising campaigns.",
-      technologies: ["Ethereum", "Solidity", "Web3", "Smart Contracts"],
-      githubUrl: "https://github.com/AnishRane/CrowdFunding",
-    },
-    {
-      title: "E-Sign Application (NestJS)",
-      description:
-        "Secure digital document signing application with robust authentication and document management features.",
-      technologies: ["NestJS", "TypeScript", "Authentication", "Document Management"],
-      githubUrl: "https://github.com/AnishRane/E-Sign-Document",
-    },
-  ]
-
   return (
-    <section id="projects" className="section-padding bg-gradient-to-br from-muted/30 via-gray-400/5 to-gray-600/10">
-      <div className="container">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-responsive-2xl font-bold text-center mb-4">
-            <ShinyText 
-              text="Projects" 
-              disabled={false} 
-              speed={3} 
-              className="bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 bg-clip-text text-transparent drop-shadow-sm" 
-            />
-          </h2>
-          <p className="text-center text-muted-foreground mb-responsive max-w-2xl mx-auto text-responsive-base">
-            A showcase of my work in backend development, Web3 applications, and blockchain technologies.
-          </p>
+    <section id="projects" style={{ position: "relative", padding: "clamp(72px,10vw,104px) 0", scrollMarginTop: 90 }}>
+      <div className="ta-reveal" style={{ maxWidth: 1152, margin: "0 auto", padding: "0 24px" }}>
+        <p className="ta-eyebrow">05 / Projects</p>
+        <h2 className="ta-h2">Featured Projects</h2>
+        <p style={{ color: "#A1A1AA", fontSize: "1.08rem", margin: "14px 0 0" }}>Backend, Web3, and blockchain work.</p>
 
-          <div className="grid grid-responsive-3 gap-responsive mb-8">
-            {projects.map((project, index) => (
-              <Card
-                key={index}
-                className="h-full flex flex-col glass-card-hover glass-glow"
-              >
-                <CardHeader>
-                  <CardTitle className="text-lg mb-2 text-gradient">
-                    {project.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="flex-1 flex flex-col">
-                  <p className="text-sm text-muted-foreground mb-4 flex-1">{project.description}</p>
-
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.technologies.map((tech) => (
-                      <Badge
-                        key={tech}
-                        variant="secondary"
-                        className="text-xs glass-card-subtle"
-                      >
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
-
-                  <div className="flex gap-2 mt-auto">
-                    <Button
-                      asChild
-                      size="sm"
-                      variant="outline"
-                      className="flex-1 glass-card-subtle hover:glass-card"
-                    >
-                      <Link href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                        <Github className="h-4 w-4 mr-2" />
-                        View on GitHub
-                      </Link>
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <div className="text-center">
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="glass-card-hover glass-glow"
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(320px,1fr))", gap: 18, marginTop: 42 }}>
+          {PROJECTS.map((p) => (
+            <a
+              key={p.title}
+              href={p.url}
+              target="_blank"
+              rel="noopener"
+              className="ta-card ta-project"
+              style={{ display: "flex", flexDirection: "column", padding: 24, textDecoration: "none", cursor: "pointer" }}
             >
-              <Link href="https://github.com/AnishRane" target="_blank" rel="noopener noreferrer">
-                <Github className="h-4 w-4 mr-2" />
-                View All Projects on GitHub
-              </Link>
-            </Button>
-          </div>
+              <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12 }}>
+                <div
+                  style={{
+                    width: 42,
+                    height: 42,
+                    borderRadius: 11,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    background: "linear-gradient(140deg,rgba(var(--ac1-rgb),0.18),rgba(var(--ac2-rgb),0.18))",
+                    color: "var(--ac2)",
+                  }}
+                >
+                  <CodeIcon />
+                </div>
+                <span className="ta-gh-ico" style={{ color: "#6B6B76" }}>
+                  <GithubIcon />
+                </span>
+              </div>
+              <h3 style={{ fontFamily: "var(--f-head)", fontWeight: 600, fontSize: "1.18rem", margin: "18px 0 10px", color: "#F4F4F6" }}>{p.title}</h3>
+              <p style={{ margin: "0 0 18px", color: "#A1A1AA", fontSize: "0.95rem", lineHeight: 1.6, flex: 1 }}>{p.desc}</p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
+                {p.tags.map((t) => (
+                  <span key={t} className="ta-tag ta-tag-sm">
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </a>
+          ))}
         </div>
       </div>
     </section>

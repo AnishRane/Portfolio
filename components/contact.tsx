@@ -1,145 +1,148 @@
 "use client"
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Mail, Github, Twitter } from "lucide-react"
-import Link from "next/link"
-import { useCopyEmail } from "@/hooks/use-copy-email"
-import ShinyText from './ShinyText'
+import { useEffect, useRef, useState } from "react"
+import { GithubIcon, LinkedinIcon, MailIcon, DownloadIcon, CopyIcon, CheckIcon } from "@/components/ta-icons"
+
+const EMAIL = "anishrane.dev@gmail.com"
 
 export function Contact() {
-  const { copyEmail, email } = useCopyEmail()
-  
-  const contactInfo = [
-    {
-      icon: <Mail className="h-5 w-5" />,
-      label: "Email",
-      value: email,
-      href: "mailto:" + email,
-      onClick: copyEmail,
-    },
-    {
-      icon: <Github className="h-5 w-5" />,
-      label: "GitHub",
-      value: "github.com/AnishRane",
-      href: "https://github.com/AnishRane",
-    },
-  ]
+  const [toast, setToast] = useState(false)
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => () => {
+    if (timer.current) clearTimeout(timer.current)
+  }, [])
+
+  const copyEmail = () => {
+    try {
+      navigator.clipboard?.writeText(EMAIL)
+    } catch {
+      /* noop */
+    }
+    setToast(true)
+    if (timer.current) clearTimeout(timer.current)
+    timer.current = setTimeout(() => setToast(false), 2200)
+  }
 
   return (
-    <section id="contact" className="section-padding bg-gradient-to-br from-background via-muted/20 to-primary/5">
-      <div className="container">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-responsive-2xl font-bold text-center mb-4">
-            <ShinyText 
-              text="Get In Touch" 
-              disabled={false} 
-              speed={3} 
-              className="bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 bg-clip-text text-transparent drop-shadow-sm" 
-            />
+    <section id="contact" style={{ position: "relative", padding: "clamp(80px,11vw,120px) 0", overflow: "hidden", scrollMarginTop: 90 }}>
+      <div aria-hidden="true" style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: "50%",
+            marginLeft: -400,
+            width: 800,
+            height: 600,
+            background: "radial-gradient(circle,rgba(var(--ac1-rgb),0.4),transparent 60%)",
+            filter: "blur(130px)",
+            opacity: 0.12,
+            animation: "drift1 20s ease-in-out infinite",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            bottom: 0,
+            right: "10%",
+            width: 500,
+            height: 500,
+            background: "radial-gradient(circle,rgba(var(--ac2-rgb),0.4),transparent 60%)",
+            filter: "blur(120px)",
+            opacity: 0.1,
+            animation: "drift2 22s ease-in-out infinite",
+          }}
+        />
+      </div>
+
+      <div style={{ position: "relative", maxWidth: 1000, margin: "0 auto", padding: "0 24px" }}>
+        <div
+          className="ta-card"
+          style={{ borderRadius: 22, boxShadow: "0 0 60px rgba(var(--ac1-rgb),0.08)", padding: "clamp(28px,5vw,52px)" }}
+        >
+          <p className="ta-eyebrow" style={{ textAlign: "center" }}>
+            08 / Contact
+          </p>
+          <h2
+            className="ta-h2"
+            style={{ textAlign: "center", background: "var(--grad)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}
+          >
+            Let&apos;s Build Something
           </h2>
-          <p className="text-center text-muted-foreground mb-responsive max-w-2xl mx-auto text-responsive-base">
-            I'm always interested in discussing new opportunities, innovative projects, and collaborations in backend
-            development and Web3 technologies.
+          <p style={{ color: "#A1A1AA", fontSize: "1.12rem", lineHeight: 1.6, margin: "18px auto 0", textAlign: "center", maxWidth: 520 }}>
+            Open to backend, AI, and Web3 opportunities. Let&apos;s talk.
           </p>
 
-          <div className="grid grid-responsive-2 gap-responsive">
-            <Card className="glass-card-hover glass-glow">
-              <CardHeader>
-                <CardTitle className="text-lg text-gradient">
-                  Let's Connect
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground mb-6">
-                  Whether you're looking for a backend developer, want to discuss a Ai project, or just want to
-                  connect, I'd love to hear from you.
-                </p>
+          <div data-contact-grid style={{ display: "grid", gridTemplateColumns: "1fr", gap: 32, marginTop: 42, alignItems: "center" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              <button onClick={copyEmail} className="ta-contact-row">
+                <span style={{ width: 40, height: 40, flex: "none", borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(var(--ac1-rgb),0.12)", color: "var(--ac1)" }}>
+                  <MailIcon size={19} />
+                </span>
+                <span style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                  <span style={{ fontSize: "0.95rem" }}>{EMAIL}</span>
+                  <span style={{ fontFamily: "var(--f-mono)", fontSize: "0.7rem", color: "#6B6B76" }}>click to copy</span>
+                </span>
+                <span style={{ marginLeft: "auto", color: "#6B6B76" }}>
+                  <CopyIcon />
+                </span>
+              </button>
 
-                <div className="space-y-4">
-                  {contactInfo.map((item, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      <span className="text-primary">{item.icon}</span>
-                      <div>
-                        <p className="text-sm text-muted-foreground">{item.label}</p>
-                        {item.href ? (
-                          item.onClick ? (
-                            <button
-                              onClick={item.onClick}
-                              className="font-medium hover:text-primary transition-colors text-left"
-                            >
-                              {item.value}
-                            </button>
-                          ) : (
-                            <Link
-                              href={item.href}
-                              className="font-medium hover:text-primary transition-colors"
-                              target={item.href.startsWith("http") ? "_blank" : undefined}
-                              rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                            >
-                              {item.value}
-                            </Link>
-                          )
-                        ) : (
-                          <p className="font-medium">{item.value}</p>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+              <a href="https://github.com/AnishRane" target="_blank" rel="noopener" className="ta-contact-row">
+                <span style={{ width: 40, height: 40, flex: "none", borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(var(--ac2-rgb),0.12)", color: "var(--ac2)" }}>
+                  <GithubIcon size={19} />
+                </span>
+                <span style={{ fontSize: "0.95rem" }}>github.com/AnishRane</span>
+              </a>
 
-            <Card className="glass-card-hover glass-glow">
-              <CardHeader>
-                <CardTitle className="text-lg text-gradient">
-                  Quick Actions
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <Button
-                  onClick={copyEmail}
-                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
-                  size="lg"
-                >
-                  <Mail className="h-4 w-4 mr-2" />
-                  Send Email
-                </Button>
+              <a href="https://www.linkedin.com/in/anishrane" target="_blank" rel="noopener" className="ta-contact-row">
+                <span style={{ width: 40, height: 40, flex: "none", borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(var(--ac1-rgb),0.12)", color: "var(--ac1)" }}>
+                  <LinkedinIcon size={19} />
+                </span>
+                <span style={{ fontSize: "0.95rem" }}>linkedin.com/in/anishrane</span>
+              </a>
+            </div>
 
-                <Button
-                  asChild
-                  variant="outline"
-                  className="w-full glass-card-subtle hover:glass-card"
-                  size="lg"
-                >
-                  <Link href="https://github.com/AnishRane" target="_blank" rel="noopener noreferrer">
-                    <Github className="h-4 w-4 mr-2" />
-                    View GitHub Profile
-                  </Link>
-                </Button>
-
-                <Button
-                  asChild
-                  variant="outline"
-                  className="w-full glass-card-subtle hover:glass-card"
-                  size="lg"
-                >
-                  <Link href="https://x.com/stark_ar98" target="_blank" rel="noopener noreferrer">
-                    <Twitter className="h-4 w-4 mr-2" />
-                    Follow on Twitter
-                  </Link>
-                </Button>
-
-                <div className="pt-4 border-t">
-                  <p className="text-sm text-muted-foreground text-center">
-      
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
+            <div style={{ display: "flex", flexDirection: "column", gap: 14, alignItems: "stretch" }}>
+              <a href={`mailto:${EMAIL}`} className="ta-contact-cta-primary">
+                <MailIcon size={19} />
+                Email Me
+              </a>
+              <a href="/anish-rane-resume.pdf" target="_blank" rel="noopener" className="ta-contact-cta-secondary">
+                <DownloadIcon size={19} />
+                Download Resume
+              </a>
+            </div>
           </div>
         </div>
       </div>
+
+      {toast && (
+        <div
+          style={{
+            position: "fixed",
+            bottom: 28,
+            left: "50%",
+            transform: "translateX(-50%)",
+            zIndex: 90,
+            display: "flex",
+            alignItems: "center",
+            gap: 10,
+            padding: "13px 20px",
+            borderRadius: 12,
+            background: "rgba(15,15,22,0.95)",
+            border: "1px solid rgba(52,211,153,0.4)",
+            boxShadow: "0 12px 40px rgba(0,0,0,0.5)",
+            color: "#F4F4F6",
+            fontSize: "0.92rem",
+            animation: "fadeRole .3s ease",
+          }}
+        >
+          <CheckIcon />
+          Email copied to clipboard
+        </div>
+      )}
     </section>
   )
 }

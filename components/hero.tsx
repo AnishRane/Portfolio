@@ -1,135 +1,220 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Github, Mail } from "lucide-react"
-import Link from "next/link"
-import { useCopyEmail } from "@/hooks/use-copy-email"
-import RotatingText from './RotatingText'
-import ShinyText from './ShinyText'
-// import Beams from './Beams'
+import { useEffect, useState } from "react"
+import { GithubIcon, LinkedinIcon, XIcon, MailIcon, ArrowRightIcon } from "@/components/ta-icons"
 
-const EASE = [0.22, 1, 0.36, 1] as const
-
-const heroVariants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: EASE, delay: i * 0.1 },
-  }),
-}
+const ROLES = ["scalable backends", "tools for AI agents", "Web3 payment systems"]
 
 export function Hero() {
-  const { copyEmail } = useCopyEmail()
+  const [roleIdx, setRoleIdx] = useState(0)
+
+  useEffect(() => {
+    const t = setInterval(() => setRoleIdx((i) => (i + 1) % ROLES.length), 2800)
+    return () => clearInterval(t)
+  }, [])
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
-      {/* Beams Background */}
-      {/* <div className="absolute inset-0 w-full h-full">
-        <Beams
-          beamWidth={2}
-          beamHeight={15}
-          beamNumber={12}
-          lightColor="#ffffff"
-          speed={2}
-          noiseIntensity={1.75}
-          scale={0.2}
-          rotation={-15}
+    <section
+      id="top"
+      style={{
+        position: "relative",
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        overflow: "hidden",
+        padding: "140px 0 90px",
+      }}
+    >
+      {/* aurora */}
+      <div aria-hidden="true" style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
+        <div
+          style={{
+            position: "absolute",
+            top: "-12%",
+            left: "50%",
+            marginLeft: -450,
+            width: 900,
+            height: 900,
+            background: "radial-gradient(circle,rgba(var(--ac1-rgb),0.55),transparent 60%)",
+            filter: "blur(120px)",
+            opacity: 0.18,
+            animation: "drift1 16s ease-in-out infinite",
+          }}
         />
-      </div> */}
+        <div
+          style={{
+            position: "absolute",
+            top: "8%",
+            left: "14%",
+            width: 680,
+            height: 680,
+            background: "radial-gradient(circle,rgba(var(--ac2-rgb),0.5),transparent 60%)",
+            filter: "blur(120px)",
+            opacity: 0.15,
+            animation: "drift2 19s ease-in-out infinite",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            bottom: "-8%",
+            right: "8%",
+            width: 620,
+            height: 620,
+            background: "radial-gradient(circle,rgba(var(--ac1-rgb),0.45),transparent 60%)",
+            filter: "blur(120px)",
+            opacity: 0.13,
+            animation: "drift1 22s ease-in-out infinite",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage: "radial-gradient(rgba(255,255,255,0.6) 1px,transparent 1px)",
+            backgroundSize: "34px 34px",
+            opacity: 0.035,
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "radial-gradient(ellipse 80% 70% at 50% 45%,transparent 35%,#08080C 92%)",
+          }}
+        />
+      </div>
 
-      {/* Content */}
-      <div className="container text-center relative z-10">
-        <div className="max-w-4xl mx-auto">
-          <motion.h1
-            custom={0}
-            variants={heroVariants}
-            initial="hidden"
-            animate="visible"
-            className="text-responsive-3xl font-bold mb-6"
+      <div style={{ position: "relative", maxWidth: 1152, margin: "0 auto", padding: "0 24px", width: "100%" }}>
+        <p
+          style={{
+            fontFamily: "var(--f-mono)",
+            fontSize: "0.85rem",
+            letterSpacing: "0.18em",
+            textTransform: "uppercase",
+            color: "#6B6B76",
+            margin: "0 0 22px",
+          }}
+        >
+          // Backend &amp; AI Engineer
+        </p>
+        <h1
+          style={{
+            fontFamily: "var(--f-head)",
+            fontWeight: 700,
+            fontSize: "clamp(3rem,8.5vw,6.2rem)",
+            lineHeight: 0.98,
+            letterSpacing: "-0.03em",
+            margin: 0,
+            color: "#F4F4F6",
+          }}
+        >
+          Anish Rane
+        </h1>
+        <div
+          style={{
+            height: 5,
+            width: 148,
+            margin: "22px 0 30px",
+            borderRadius: 9999,
+            background: "var(--grad)",
+            boxShadow: "0 0 22px rgba(var(--ac1-rgb),0.5)",
+          }}
+        />
+        <div
+          style={{
+            fontFamily: "var(--f-head)",
+            fontWeight: 500,
+            fontSize: "clamp(1.4rem,3.6vw,2.3rem)",
+            letterSpacing: "-0.01em",
+            color: "#F4F4F6",
+            minHeight: "1.4em",
+            display: "flex",
+            alignItems: "baseline",
+            flexWrap: "wrap",
+            gap: "0.4ch",
+          }}
+        >
+          <span>I build</span>
+          <span
+            key={roleIdx}
+            style={{
+              background: "var(--grad)",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              color: "transparent",
+              animation: "fadeRole .5s ease",
+              fontWeight: 700,
+            }}
           >
-            <ShinyText
-              text="Anish Rane"
-              disabled={false}
-              speed={3}
-              className="bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 bg-clip-text text-transparent drop-shadow-sm"
-            />
-          </motion.h1>
-          <motion.h2
-            custom={1}
-            variants={heroVariants}
-            initial="hidden"
-            animate="visible"
-            className="text-responsive-xl font-semibold mb-6 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent flex items-center justify-center gap-2 flex-wrap"
+            {ROLES[roleIdx]}
+          </span>
+          <span
+            style={{
+              display: "inline-block",
+              width: 3,
+              height: "1.05em",
+              transform: "translateY(0.16em)",
+              background: "var(--ac2)",
+              animation: "blink 1.1s step-end infinite",
+              borderRadius: 2,
+            }}
+          />
+        </div>
+        <p style={{ maxWidth: 620, color: "#A1A1AA", fontSize: "1.12rem", lineHeight: 1.65, margin: "26px 0 0" }}>
+          Software Engineer at Xfinite Global (Eros International). I design microservices, MCP servers and tooling for AI
+          agents, and decentralized systems — and I&apos;ve shipped 2 published SDKs used by AI agents.
+        </p>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 14, margin: "36px 0 0" }}>
+          <a href="#projects" className="ta-cta-primary">
+            View My Work
+            <ArrowRightIcon />
+          </a>
+          <a href="#contact" className="ta-cta-secondary">
+            Get in Touch
+          </a>
+        </div>
+        <div style={{ display: "flex", gap: 12, margin: "38px 0 0" }}>
+          <a href="https://github.com/AnishRane" target="_blank" rel="noopener" aria-label="GitHub" className="ta-social">
+            <GithubIcon />
+          </a>
+          <a href="https://www.linkedin.com/in/anishrane" target="_blank" rel="noopener" aria-label="LinkedIn" className="ta-social">
+            <LinkedinIcon />
+          </a>
+          <a href="https://x.com/AnishRane" target="_blank" rel="noopener" aria-label="X" className="ta-social">
+            <XIcon />
+          </a>
+          <a href="mailto:anishrane.dev@gmail.com" aria-label="Email" className="ta-social">
+            <MailIcon />
+          </a>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 8,
+            margin: "64px auto 0",
+            width: "fit-content",
+            color: "#6B6B76",
+          }}
+        >
+          <span style={{ fontFamily: "var(--f-mono)", fontSize: "0.72rem", letterSpacing: "0.2em", textTransform: "uppercase" }}>
+            scroll
+          </span>
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{ animation: "bob 1.8s ease-in-out infinite" }}
           >
-            <RotatingText
-              texts={['AI Ecosystem', 'Backend', 'Web3', 'DevOps']}
-              mainClassName="px-2 sm:px-2 md:px-3 bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 text-white shadow-lg overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg border border-gray-400/30"
-              staggerFrom="last"
-              initial={{ y: "100%", opacity: 0 } as any}
-              animate={{ y: 0, opacity: 1 } as any}
-              exit={{ y: "-100%", opacity: 0 } as any}
-              staggerDuration={0.012}
-              splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              rotationInterval={3000}
-            />
-          </motion.h2>
-          <motion.p
-            custom={2}
-            variants={heroVariants}
-            initial="hidden"
-            animate="visible"
-            className="text-responsive-lg text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed"
-          >
-            Backend developer & OSS contributor with 5+ years building scalable systems. Authored DPSN SDKs
-            enabling real-time decentralized data for AI agents, and contributed integrations to GAME by Virtuals
-            and GOAT SDK in the Agentic AI & DeFi ecosystem.
-          </motion.p>
-
-          <motion.div
-            custom={3}
-            variants={heroVariants}
-            initial="hidden"
-            animate="visible"
-            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-8"
-          >
-            <Button
-              asChild
-              size="lg"
-              className="w-full sm:w-auto bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 text-white shadow-lg border border-gray-400/30 hover:from-gray-300 hover:via-gray-400 hover:to-gray-500"
-            >
-              <Link href="#open-source">View OSS Work</Link>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="w-full sm:w-auto bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 text-white shadow-lg border border-gray-400/30 hover:from-gray-300 hover:via-gray-400 hover:to-gray-500">
-              <Link href="#contact">Get In Touch</Link>
-            </Button>
-          </motion.div>
-
-          <motion.div
-            custom={4}
-            variants={heroVariants}
-            initial="hidden"
-            animate="visible"
-            className="flex justify-center space-x-6"
-          >
-            <button
-              onClick={copyEmail}
-              className="text-muted-foreground hover:text-primary transition-colors"
-              aria-label="Copy email"
-            >
-              <Mail className="h-5 w-5 sm:h-6 sm:w-6" />
-            </button>
-            <Link
-              href="https://github.com/AnishRane"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors"
-            >
-              <Github className="h-5 w-5 sm:h-6 sm:w-6" />
-            </Link>
-          </motion.div>
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
         </div>
       </div>
     </section>

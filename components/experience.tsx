@@ -1,135 +1,79 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Building, Calendar } from "lucide-react"
-import ShinyText from './ShinyText'
-
-const achievements = [
-  "Architected and maintained scalable backend systems and microservices using NestJS, Node.js, and PostgreSQL",
-  "Integrated Redis, Kafka, and BullMQ for asynchronous processing and high-throughput event pipelines",
-  "Led the development of decentralized crypto payment systems with Web3 RPC integration",
-  "Engineered a custodial transaction processor for EVM DApps using HashiCorp Vault",
-  "Implemented NFT-based KYC system on the Algorand blockchain",
-  "Drove multi-cloud DevOps migration from AWS to GCP, managing containerized deployments with Docker and Kubernetes",
+const BULLETS = [
+  "Architected scalable backend microservices with NestJS, Node.js and PostgreSQL.",
+  "Integrated Redis, Kafka and BullMQ for async + high-throughput event pipelines.",
+  "Led decentralized crypto payment systems with Web3 RPC integration.",
+  "Engineered a custodial transaction processor for EVM dApps using HashiCorp Vault.",
+  "Implemented an NFT-based KYC system on Algorand.",
+  "Drove multi-cloud DevOps migration (AWS → GCP) with Docker & Kubernetes.",
 ]
 
-const notableProjects = [
+const FEATURED = [
   {
-    name: "IP Content Enrichment MCP Servers",
-    label: "AI / MCP",
-    description:
-      "Built Model Context Protocol servers that give AI agents real-time access to Eros Now's IP library metadata, enabling an Amazon Prime X-Ray-style contextual intelligence layer for content discovery and AI-driven features.",
-    highlights: [
-      "Designed MCP tool schemas for cast, crew, plot, genre, and scene-level metadata queries",
-      "Enabled AI agents to surface live IP context and enrich content recommendations autonomously",
-      "Integrated with existing CMS and content metadata pipelines via typed tool interfaces",
-    ],
-    technologies: ["MCP", "Node.js", "TypeScript", "AI Agents", "REST APIs", "PostgreSQL"],
+    title: "IP Content Enrichment MCP Servers",
+    desc: "MCP servers giving AI agents real-time access to the IP library — Prime X-Ray-style intelligence over a vast content catalog.",
+    tags: ["MCP", "Node.js", "TypeScript", "AI Agents", "PostgreSQL"],
   },
   {
-    name: "Subtitle Generation Microservice",
-    label: "AI Infra",
-    description:
-      "Developed an on-device subtitle generation service using Apple MLX Whisper, running on internal Mac Minis to process video audio locally with GPU acceleration, eliminating cloud API costs while delivering high transcription accuracy at scale.",
-    highlights: [
-      "Deployed on internal Mac Minis using Apple MLX framework with zero external API dependency",
-      "GPU-accelerated transcription via MLX Whisper, leveraging Apple Silicon on the internal hardware",
-      "Exposed as a REST microservice, integrating directly into the content pipeline for automated subtitle delivery",
-    ],
-    technologies: ["Python", "MLX", "Whisper", "Apple Silicon", "FastAPI", "Microservices"],
+    title: "Subtitle Generation Microservice",
+    desc: "On-device MLX Whisper subtitle service on internal Mac Minis — zero cloud-API cost, GPU-accelerated on Apple Silicon.",
+    tags: ["Python", "MLX", "Whisper", "Apple Silicon", "FastAPI"],
   },
 ]
-
 
 export function Experience() {
   return (
-    <section id="experience" className="section-padding">
-      <div className="container">
-        <div className="max-w-4xl mx-auto">
-          <p className="section-label text-center mb-3">04 / Experience</p>
-          <h2 className="text-responsive-2xl font-bold text-center mb-responsive">
-            <ShinyText
-              text="Professional Experience"
-              disabled={false}
-              speed={3}
-              className="bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 bg-clip-text text-transparent drop-shadow-sm"
-            />
-          </h2>
+    <section id="experience" style={{ position: "relative", padding: "clamp(72px,10vw,104px) 0", background: "#0F0F16", scrollMarginTop: 90 }}>
+      <div className="ta-reveal" style={{ maxWidth: 1152, margin: "0 auto", padding: "0 24px" }}>
+        <p className="ta-eyebrow">03 / Experience</p>
+        <h2 className="ta-h2">Professional Experience</h2>
 
-          <Card className="glass-card-hover glass-glow">
-            <CardHeader>
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                <div>
-                  <CardTitle className="text-lg mb-2 text-gradient">Software Developer</CardTitle>
-                  <div className="flex items-center gap-2 text-muted-foreground mb-2">
-                    <Building className="h-4 w-4" />
-                    <span className="text-responsive-sm">Xfinite Global Plc (Eros International)</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-muted-foreground">
-                    <Calendar className="h-4 w-4" />
-                    <span className="text-responsive-sm">2021 – Present · Andheri, Mumbai</span>
-                  </div>
-                </div>
+        <div style={{ marginTop: 46, position: "relative", paddingLeft: 32, borderLeft: "2px solid rgba(255,255,255,0.08)" }}>
+          <span
+            style={{
+              position: "absolute",
+              left: -9,
+              top: 4,
+              width: 16,
+              height: 16,
+              borderRadius: "50%",
+              background: "var(--grad)",
+              boxShadow: "0 0 16px rgba(var(--ac1-rgb),0.7)",
+            }}
+          />
+          <div style={{ display: "flex", flexWrap: "wrap", alignItems: "baseline", gap: "8px 14px" }}>
+            <h3 style={{ fontFamily: "var(--f-head)", fontWeight: 600, fontSize: "1.4rem", margin: 0, color: "#F4F4F6" }}>Software Developer</h3>
+            <span style={{ color: "var(--ac1)", fontSize: "1.05rem" }}>Xfinite Global Plc (Eros International)</span>
+          </div>
+          <p style={{ fontFamily: "var(--f-mono)", fontSize: "0.8rem", color: "#6B6B76", margin: "6px 0 0", letterSpacing: "0.04em" }}>
+            2022 — Present
+          </p>
+          <ul style={{ listStyle: "none", padding: 0, margin: "22px 0 0", display: "flex", flexDirection: "column", gap: 13 }}>
+            {BULLETS.map((b) => (
+              <li key={b} style={{ display: "flex", gap: 12, color: "#A1A1AA", fontSize: "1.02rem", lineHeight: 1.6 }}>
+                <span style={{ color: "var(--ac2)", flex: "none", marginTop: 2 }}>▹</span>
+                {b}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: 18, marginTop: 34 }}>
+          {FEATURED.map((f) => (
+            <div key={f.title} className="ta-card ta-card-hover" style={{ padding: 24 }}>
+              <p style={{ fontFamily: "var(--f-mono)", fontSize: "0.72rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--ac2)", margin: "0 0 10px" }}>
+                Featured
+              </p>
+              <h4 style={{ fontFamily: "var(--f-head)", fontWeight: 600, fontSize: "1.15rem", margin: "0 0 10px", color: "#F4F4F6" }}>{f.title}</h4>
+              <p style={{ margin: "0 0 16px", color: "#A1A1AA", fontSize: "0.95rem", lineHeight: 1.6 }}>{f.desc}</p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
+                {f.tags.map((t) => (
+                  <span key={t} className="ta-tag ta-tag-sm">
+                    {t}
+                  </span>
+                ))}
               </div>
-            </CardHeader>
-
-            <CardContent>
-              <div className="space-y-responsive">
-
-                {/* Notable Projects */}
-                <div>
-                  <h4 className="font-semibold mb-4 text-sm">Notable Projects</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {notableProjects.map((project) => (
-                      <div
-                        key={project.name}
-                        className="rounded-lg border border-primary/10 bg-primary/[0.03] p-4 flex flex-col gap-3"
-                      >
-                        <div className="flex items-start justify-between gap-2">
-                          <h5 className="font-semibold text-sm leading-tight text-foreground">{project.name}</h5>
-                          <span className="text-[10px] font-mono tracking-wider text-accent/70 bg-accent/10 px-2 py-0.5 rounded-full shrink-0">
-                            {project.label}
-                          </span>
-                        </div>
-
-                        <p className="text-sm text-muted-foreground leading-relaxed">{project.description}</p>
-
-                        <ul className="space-y-1.5 flex-1">
-                          {project.highlights.map((h, i) => (
-                            <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
-                              <span className="text-primary mt-0.5 shrink-0">▸</span>
-                              <span className="leading-relaxed">{h}</span>
-                            </li>
-                          ))}
-                        </ul>
-
-                        <div className="flex flex-wrap gap-1.5 pt-1">
-                          {project.technologies.map((tech) => (
-                            <Badge key={tech} variant="outline" className="text-[10px] glass-card-subtle px-1.5 py-0">
-                              {tech}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Key Achievements */}
-                <div>
-                  <h4 className="font-semibold mb-3 text-sm">Key Achievements</h4>
-                  <ul className="space-y-2">
-                    {achievements.map((achievement, index) => (
-                      <li key={index} className="text-sm text-muted-foreground flex items-start gap-2">
-                        <span className="text-primary mt-0.5 shrink-0">▸</span>
-                        <span className="leading-relaxed">{achievement}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-              </div>
-            </CardContent>
-          </Card>
+            </div>
+          ))}
         </div>
       </div>
     </section>
